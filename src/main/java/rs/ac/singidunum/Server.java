@@ -21,7 +21,7 @@ public class Server {
     public static void main(String[] args) {
         int port = 8088;
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            System.out.println("✅ Server started. Waiting for client...");
+            System.out.println("Server started. Waiting for client...");
 
             while (true) {
 
@@ -29,11 +29,11 @@ public class Server {
                      DataInputStream in = new DataInputStream(server.getInputStream());
                      DataOutputStream out = new DataOutputStream(server.getOutputStream())) {
 
-                    System.out.println("🔗 Client connected: " + server.getRemoteSocketAddress());
+                    System.out.println("Client connected: " + server.getRemoteSocketAddress());
 
                     //1. Server accepts the user, authentication and confidentiality service
                     String clientMessage = in.readUTF();
-                    System.out.println("📩 Client: " + clientMessage);
+                    System.out.println("Client: " + clientMessage);
 
                     //1.1. Server sends algorithm specification to the client
                     String algSpec = "AES/CBC/PKCS5";
@@ -74,7 +74,7 @@ public class Server {
                     out.writeUTF(Base64.getEncoder().encodeToString(encryptedMessage));
                     System.out.println("Message encrypted with AES sent to the client!!");
 
-                    System.out.println("🔚 Connection closed.\n");
+                    System.out.println("Connection closed.\n");
                 } catch (Exception e) {
                     // Communication failure with ONE client does not crash the server
                     LOGGER.log(Level.WARNING, "Error processing client connection", e);

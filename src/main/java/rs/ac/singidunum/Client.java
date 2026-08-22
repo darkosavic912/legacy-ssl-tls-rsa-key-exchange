@@ -72,6 +72,6 @@ public class Client {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error in client communication or cryptographic operations", e);
         }
-        System.out.println("🔚 Connection closed.");
+        System.out.println("Connection closed.");
     }
 }
