@@ -17,8 +17,7 @@ public class AES_cipher {
             //E
             Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
             c.init(Cipher.ENCRYPT_MODE, key, IV);
-            byte[] sifrat = c.doFinal(plaintext);
-            return sifrat;
+            return c.doFinal(plaintext);
     }
 
     public byte[] decrypt(SecretKey key, byte[] ciphertext) throws Exception{
@@ -30,8 +29,7 @@ public class AES_cipher {
             //E
             Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
             c.init(Cipher.DECRYPT_MODE, key, IV);
-            byte[] plaitext = c.doFinal(ciphertext);
-            return plaitext;
+            return c.doFinal(ciphertext);
     }
 
     public SecretKey generateKey(String password) throws NoSuchAlgorithmException{
