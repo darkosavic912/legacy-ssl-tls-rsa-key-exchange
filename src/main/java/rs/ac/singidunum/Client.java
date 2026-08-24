@@ -64,7 +64,7 @@ public class Client {
             //2. Client decrypts the message received from the server (Confidentiality service)
             byte[] encryptedMessage = Base64.getDecoder().decode(in.readUTF());
             byte[] decryptedMessage = new AESCipher().decrypt(aesKey, encryptedMessage);
-            System.err.println("Message from server: ");
+            System.out.println("Message from server: ");
             System.out.println(new String(decryptedMessage));
 
         } catch (Exception e) {
