@@ -13,7 +13,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
 
-public class RSA_encryption {
+public class RSA {
     public KeyPair pairOfKeys(int keySize) throws NoSuchAlgorithmException{
             KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
             kpg.initialize(keySize);

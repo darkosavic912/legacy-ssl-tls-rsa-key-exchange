@@ -12,7 +12,7 @@ public class GenerateKeys {
         digitalSignature.saveKey(ServerKeyPairDP.getPrivate().getEncoded(), "server_private_DP.key");
         digitalSignature.saveKey(ServerKeyPairDP.getPublic().getEncoded(), "server_public_DP.key");
 
-        RSA_encryption rsaEncryption = new RSA_encryption();
+        RSA rsaEncryption = new RSA();
         KeyPair ClientKeyPairRSA = rsaEncryption.pairOfKeys(2048);
         KeyPair ServerKeyPairRSA = rsaEncryption.pairOfKeys(2048);
         rsaEncryption.saveKey(ClientKeyPairRSA.getPrivate().getEncoded(), "client_private_RSA.key");

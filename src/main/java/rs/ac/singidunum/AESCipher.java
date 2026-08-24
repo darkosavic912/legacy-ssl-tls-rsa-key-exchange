@@ -7,26 +7,25 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class AES_cipher {
+public class AESCipher {
 
     public byte[] encrypt(SecretKey key, byte[] plaintext)  throws  Exception{
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashKey = md.digest(key.getEncoded());
             byte[] iv = Arrays.copyOfRange(hashKey, 0, 16);
             IvParameterSpec IV = new IvParameterSpec(iv);
-            //E
+
             Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
             c.init(Cipher.ENCRYPT_MODE, key, IV);
             return c.doFinal(plaintext);
     }
 
     public byte[] decrypt(SecretKey key, byte[] ciphertext) throws Exception{
-            //IV
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashKey = md.digest(key.getEncoded());
             byte[] iv = Arrays.copyOfRange(hashKey, 0, 16);
             IvParameterSpec IV = new IvParameterSpec(iv);
-            //E
+
             Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
             c.init(Cipher.DECRYPT_MODE, key, IV);
             return c.doFinal(ciphertext);

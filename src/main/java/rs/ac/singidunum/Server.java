@@ -44,9 +44,8 @@ public class Server {
 
                     //1.3. Receive digital signature of the encrypted key
                     byte[] keyDigitalSignature = Base64.getDecoder().decode(in.readUTF());
-                    System.out.println("Digital signature of encrypted key: " + Arrays.toString(keyDigitalSignature));
 
-                    AES_cipher aesCipher = new AES_cipher();
+                    AESCipher aesCipher = new AESCipher();
                     DigitalSignature digitalSignature = new DigitalSignature();
                     SecretKey aesKey = null;
 
@@ -59,7 +58,7 @@ public class Server {
                         System.out.println("Client: " + clientMessage + " has been successfully authenticated");
 
                         //1.6. Extracting the AES key using RSA decryption
-                        RSA_encryption rsa = new RSA_encryption();
+                        RSA rsa = new RSA();
                         PrivateKey privateKey = rsa.importPrivateKey(Files.readAllBytes
                                 (Path.of("server_private_RSA.key")));
                         aesKey = new SecretKeySpec(rsa.rsaDecrypt(encryptedAesKey, privateKey), "AES");

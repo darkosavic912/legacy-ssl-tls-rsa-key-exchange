@@ -40,11 +40,11 @@ public class Client {
             // Symmetric AES key (Secret key must be converted to byte array -> using getEncoded())
             SecretKey aesKey = null;
             if (algSpec.equals("AES/CBC/PKCS5")) {
-                aesKey = new AES_cipher().generateKey("afaogq4654ybaoff0167!");
+                aesKey = new AESCipher().generateKey("afaogq4654ybaoff0167!");
             }
 
             //1.2. Encrypting the symmetric AES key using RSA algorithm and server's public key
-            RSA_encryption rsa = new RSA_encryption();
+            RSA rsa = new RSA();
             PublicKey publicKey = rsa.importPublicKey(Files.readAllBytes
                     (Paths.get("server_public_RSA.key")));
             byte[] encryptedAesKey = rsa.rsaEncrypt(aesKey.getEncoded(), publicKey);
@@ -60,12 +60,10 @@ public class Client {
 
             //1.5. Send digital signature
             out.writeUTF(Base64.getEncoder().encodeToString(encryptedKeySignature));
-            System.out.println("Digital signature: " + Arrays.toString(encryptedKeySignature));
-            System.out.println("AES symmetric key: " + Arrays.toString(aesKey.getEncoded()));
 
             //2. Client decrypts the message received from the server (Confidentiality service)
             byte[] encryptedMessage = Base64.getDecoder().decode(in.readUTF());
-            byte[] decryptedMessage = new AES_cipher().decrypt(aesKey, encryptedMessage);
+            byte[] decryptedMessage = new AESCipher().decrypt(aesKey, encryptedMessage);
             System.err.println("Message from server: ");
             System.out.println(new String(decryptedMessage));
 
